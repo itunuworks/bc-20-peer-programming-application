@@ -1,0 +1,28 @@
+{
+  "name": "bc-20-peer-programming-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[Cserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itunuworks/bc-20-peer-programming-application.git"
+  },
+  "keywords": [
+    "peer",
+    "programming",
+    "andela-bootcamp",
+    "chat"
+  ],
+  "author": "Itunuloluwa Fatoki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itunuworks/bc-20-peer-programming-application/issues"
+  },
+  "homepage": "https://github.com/itunuworks/bc-20-peer-programming-application#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
