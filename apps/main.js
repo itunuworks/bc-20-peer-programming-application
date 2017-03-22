@@ -2,6 +2,8 @@
 
 (function init() {
   // Initialize Firebase.
+
+  console.log('I just ran');
   var config = {
   	apiKey: "AIzaSyBDV1xH1vjy5e828BKvsBhFwDhbDiyyFEk",
 	  authDomain: "peer-programming-application.firebaseapp.com",
