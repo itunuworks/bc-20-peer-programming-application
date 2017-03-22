@@ -8,8 +8,6 @@ function initLogin(){
 			document.getElementById('email'), 
 			document.getElementById('password')
 		);
-
-	//document.getElementById('signInButton').addEventListener('click', signInWithGoogle);
 }
 
 function signIn(){
@@ -28,19 +26,6 @@ function signInWithGoogle(){
 	var provider = new firebase.auth.GoogleAuthProvider();
   auth.signInWithPopup(provider);
 }
-
-
-  
-//};
-
-//function createNewUser(email, password){
-	//myAuthApp.signUp();
-//} 
-
-//function signIn(email, password){
-//	myAuthApp.signIn();
-//}
-
 
 function initAuthApp(signin, email, password){
 	return new AuthApp(signin, email, password);
