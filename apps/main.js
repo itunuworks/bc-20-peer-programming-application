@@ -1,15 +1,17 @@
 'use strict';
 
 (function init() {
-  // Initialize Firebase.
-  var config = {
-  	apiKey: "AIzaSyBDV1xH1vjy5e828BKvsBhFwDhbDiyyFEk",
-	  authDomain: "peer-programming-application.firebaseapp.com",
-	  databaseURL: "https://peer-programming-application.firebaseio.com",
-	  storageBucket: "peer-programming-application.appspot.com",
-	  messagingSenderId: "1058474997451"
-  };
-  firebase.initializeApp(config);
+	
+	var MainAuthApp = AuthApp;
+	var myAuthApp;
+
+	myAuthApp = initAuthApp();
+  myAuthApp.setUp(document.getElementById('logout'), 
+  	document.getElementById('save'), 
+  	document.getElementById('title'), 
+  	document.getElementById('description'), 
+  	document.getElementById('close'), 
+  	document.getElementById('ideabox'));
 
   // Get Firebase Database reference.
   var firepadRef = getDataRef();
@@ -29,7 +31,7 @@
 
 // Helper to get hash from end of URL or generate a random one.
 function getDataRef(){
-  var ref = firebase.database().ref();
+  var ref = myAuthApp.database;
   var hash = window.location.hash.replace(/#/g, '');
   if (hash) {
     ref = ref.child(hash);
@@ -41,4 +43,38 @@ function getDataRef(){
     console.log('Firebase data: ', ref.toString());
   }
   return ref;
+}
+ 
+MainAuthApp.prototype = Object.create(AuthApp.prototype);
+
+MainAuthApp.prototype.onAuthStateChanged = function(user){
+	console.log(user);
+	console.log("onAuthStateChanged is executed");
+
+	if (user){
+		console.log(user.email + ' is signed in.');
+		window.alert('Signed in ' + user.email);
+		this.loadIdeas();
+	}
+	else{
+		console.log('No user signed in');
+		window.location.href = "/";
+	}
+}
+
+MainAuthApp.prototype.setUp = function(logout, save, title, description, close, ideaBox){
+	console.log(logout);
+	this.logOutButton = logout;
+	this.saveIdeaButton = save;
+	this.titleTextBox = title;
+	this.descriptionTextBox = description;
+	this.closeButton = close;
+	this.ideaBoxElement = ideaBox;
+
+	this.logOutButton.addEventListener ('click', this.signOut.bind(this));
+	this.saveIdeaButton.addEventListener ('click', this.saveIdea.bind(this));
+}
+
+function initAuthApp(){
+	return new MainAuthApp();
 }
