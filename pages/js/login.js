@@ -1,11 +1,10 @@
 'use strict';
 
-function initAuth(){
+function initLogin(){
 	var myAuthApp;
 
 	myAuthApp = initAuthApp(
-			document.getElementById('signInButton'), 
-			document.getElementById('signUpButton'), 
+			document.getElementById('signInButton'),
 			document.getElementById('email'), 
 			document.getElementById('password')
 		);
@@ -43,6 +42,6 @@ function signInWithGoogle(){
 //}
 
 
-function initAuthApp(signin, signup, email, password){
-	return new AuthApp(signin, signup, email, password);
+function initAuthApp(signin, email, password){
+	return new AuthApp(signin, email, password);
 }
