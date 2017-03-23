@@ -9,6 +9,9 @@ function initializeFirebase(){
     messagingSenderId: "1058474997451"
   };
   firebase.initializeApp(config);
+
+  //Initialize emailjs.
+  emailjs.init("user_ucLimJqgRHZD05kuxKl7Y");
   console.log('fireBase just got initialized.');
 }
 

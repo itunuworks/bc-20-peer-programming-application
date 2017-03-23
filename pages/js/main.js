@@ -21,19 +21,27 @@ MainAuthApp.prototype.onAuthStateChanged = function(user){
   }
 }
 
-MainAuthApp.prototype.setUp = function(logout, editor, newSession, saveSession, deleteSession){
+MainAuthApp.prototype.setUp = function(logout, editor, newSession, saveSession, deleteSession, shareEmail, invite){
   console.log(logout);
   this.logOutButton = logout;
   this.editorField = editor;
   this.newSessionButton = newSession;
   this.saveSessionButton = saveSession;
   this.deleteSessionButton = deleteSession;
+  this.shareEmailField = shareEmail;
+  this.inviteButton = invite;
 
   this.newSessionButton.addEventListener ('click', this.newSession.bind(this));
   this.saveSessionButton.addEventListener ('click', this.saveSession.bind(this));
   this.deleteSessionButton.addEventListener ('click', this.deleteSession.bind(this));
+  this.inviteButton.addEventListener('click', this.inviteToSession.bind(this));
   this.logOutButton.addEventListener ('click', this.signOut.bind(this));
 }
+
+MainAuthApp.prototype.inviteToSession = function(){
+  console.log('invite to new session just got clicked.');
+  emailjs.send("default_service","andelap2papp",{sessionLink: window.location.href, email: this.shareEmailField.value});
+};
 
 MainAuthApp.prototype.newSession = function(){
   console.log('new session just got clicked.');
@@ -60,7 +68,9 @@ function initMain() {
     document.getElementById('editor'),
     document.getElementById('new'),
     document.getElementById('save'),
-    document.getElementById('delete'));
+    document.getElementById('delete'), 
+    document.getElementById('shareEmail'), 
+    document.getElementById('invite'));
 
   // Create CodeMirror (with line numbers and the JavaScript mode).
   codeMirror = CodeMirror(myAuthApp.editorField, {
