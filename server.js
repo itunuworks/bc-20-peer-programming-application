@@ -12,6 +12,10 @@ router.get('/', function(req, res){
 	res.sendFile( viewsPath + 'login.html');
 })
 
+router.get('/signup', function(req, res){
+	res.sendFile(viewsPath + 'signUp.html');
+})
+
 router.get('/logout', function(req, res){
 	res.sendFile(viewsPath + 'login.html');
 })

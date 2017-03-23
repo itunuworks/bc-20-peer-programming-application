@@ -38,14 +38,14 @@ function initMain() {
   	document.getElementById('logout'), 
   	document.getElementById('editor'));
 
-  // Get Firebase Database reference.
-  var firepadRef = getDataRef();
-
   // Create CodeMirror (with line numbers and the JavaScript mode).
   var codeMirror = CodeMirror(myAuthApp.editorField, {
 	  lineNumbers: true,
 	  mode: 'javascript',
 	});
+
+  // Get Firebase Database reference.
+  var firepadRef = getDataRef();
 
   // Create Firepad.
   var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
