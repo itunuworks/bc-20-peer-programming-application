@@ -48,21 +48,21 @@ function initMain() {
   var firepadRef = getDataRef();
 
   // Create Firepad.
-  var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-    defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
-  });
+  if (firepadRef !== null){
+    var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
+      defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
+    });
+  }
 }
 
-
-// Helper to get hash from end of URL or generate a random one.
+// Helper to get hash from end of URL or return a null one.
 function getDataRef(){
   var ref = myAuthApp.database.ref();
   var hash = window.location.hash.replace(/#/g, '');
   if (hash) {
     ref = ref.child(hash);
   } else {
-    ref = ref.push(); // generate unique location.
-    window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
+    return null; // return null when it is an empty session.
   }
   if (typeof console !== 'undefined') {
     console.log('Firebase data: ', ref.toString());
