@@ -12,17 +12,24 @@ function initializeFirebase(){
   console.log('fireBase just got initialized.');
 }
 
-function AuthApp(signInButton, email, password){
+function AuthApp(button, email, password, isSignIn, password2){
   
   this.initFireBase();
 
-  this.signInButton = signInButton;
   this.email = email;
   this.password = password;
   this.firstTime = true;  
-  console.log(this.signInButton);
-  if (this.signInButton != null){
-    this.signInButton.addEventListener ('click', this.signIn.bind(this));
+  if (isSignIn){
+    this.signInButton = button;
+    if (this.signInButton != null){
+      this.signInButton.addEventListener ('click', this.signIn.bind(this));
+    }
+  } else{
+    this.signUpButton = button;
+    this.password2 = password2;
+    if (this.signUpButton != null){
+      this.signUpButton.addEventListener ('click', this.signUp.bind(this));
+    }
   }
 }
 
@@ -35,20 +42,26 @@ AuthApp.prototype.initFireBase = function(){
 
 AuthApp.prototype.signUp = function (event){
   event.preventDefault();
-  var user = this.auth.createUserWithEmailAndPassword(this.email.value, this.password.value);
+  console.log(this.password.value);
+  console.log(this.password2.value);
+  if (this.password.value === this.password2.value){
+    var user = this.auth.createUserWithEmailAndPassword(this.email.value, this.password.value);
   
-  console.log(user);
-  user.catch(function(error){
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    if (errorMessage == 'auth/weak-password'){
-      alert('The password is too weak.');
-    }
-    else{
-      alert(errorMessage);
-    }
-    console.log(error);
-  });
+    console.log(user);
+    user.catch(function(error){
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      if (errorMessage == 'auth/weak-password'){
+        alert('The password is too weak.');
+      }
+      else{
+        alert(errorMessage);
+      }
+      console.log(error);
+    });
+  } else{
+    alert("The passwords don't match.");
+  }
 }
 
 AuthApp.prototype.signIn = function (event){
