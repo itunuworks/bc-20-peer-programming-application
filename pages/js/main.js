@@ -7,29 +7,29 @@ var codeMirror;
 MainAuthApp.prototype = Object.create(AuthApp.prototype);
 
 MainAuthApp.prototype.onAuthStateChanged = function(user){
-	console.log(user);
-	console.log("onAuthStateChanged is executed");
+  console.log(user);
+  console.log("onAuthStateChanged is executed");
 
-	if (user){
-		console.log(user.email + ' is signed in.');
-		window.alert('Signed in ' + user.email);
-		this.loadIdeas();
-	}
-	else{
-		console.log('No user signed in');
-		window.location.href = "/";
-	}
+  if (user){
+    console.log(user.email + ' is signed in.');
+    window.alert('Signed in ' + user.email);
+    this.loadIdeas();
+  }
+  else{
+    console.log('No user signed in');
+    window.location.href = "/";
+  }
 }
 
 MainAuthApp.prototype.setUp = function(logout, editor, newSession, saveSession, deleteSession){
-	console.log(logout);
-	this.logOutButton = logout;
-	this.editorField = editor;
+  console.log(logout);
+  this.logOutButton = logout;
+  this.editorField = editor;
   this.newSessionButton = newSession;
   this.saveSessionButton = saveSession;
   this.deleteSessionButton = deleteSession;
 
-	this.newSessionButton.addEventListener ('click', this.newSession.bind(this));
+  this.newSessionButton.addEventListener ('click', this.newSession.bind(this));
   this.saveSessionButton.addEventListener ('click', this.saveSession.bind(this));
   this.deleteSessionButton.addEventListener ('click', this.deleteSession.bind(this));
   this.logOutButton.addEventListener ('click', this.signOut.bind(this));
@@ -38,11 +38,6 @@ MainAuthApp.prototype.setUp = function(logout, editor, newSession, saveSession, 
 MainAuthApp.prototype.newSession = function(){
   console.log('new session just got clicked.');
   setupFirepad(true);
-  // var ref = ref.push(); // generate unique location.
-  // window.location = window.location + '#' + ref.key; // add it as a hash to the URL.
-  // var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-  //   defaultText: '// JavaScript Editing with Firepad!\nfunction go() {\n  var message = "Hello, world.";\n  console.log(message);\n}'
-  // });
 };
 
 MainAuthApp.prototype.saveSession = function(){
@@ -54,24 +49,24 @@ MainAuthApp.prototype.deleteSession = function(){
 };
 
 function initAuthApp(){
-	return new MainAuthApp();
+  return new MainAuthApp();
 }
 
 function initMain() {
 
-	myAuthApp = initAuthApp();
+  myAuthApp = initAuthApp();
   myAuthApp.setUp(
-  	document.getElementById('logout'), 
-  	document.getElementById('editor'),
+    document.getElementById('logout'), 
+    document.getElementById('editor'),
     document.getElementById('new'),
     document.getElementById('save'),
     document.getElementById('delete'));
 
   // Create CodeMirror (with line numbers and the JavaScript mode).
   codeMirror = CodeMirror(myAuthApp.editorField, {
-	  lineNumbers: true,
-	  mode: 'javascript',
-	});
+    lineNumbers: true,
+    mode: 'javascript',
+  });
 
   setupFirepad(false);
 }

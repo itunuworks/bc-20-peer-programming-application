@@ -9,10 +9,10 @@ function initLoginSignUp(isSignIn){
   }
 
   myAuthApp = new AuthApp(
-      document.getElementById(buttonName),
-      document.getElementById('email'), 
-      document.getElementById('password'),
-      isSignIn,
-      document.getElementById('password2')
-    );
+    document.getElementById(buttonName),
+    document.getElementById('email'), 
+    document.getElementById('password'),
+    isSignIn,
+    document.getElementById('password2')
+  );
 }
